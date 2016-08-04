@@ -1,0 +1,8 @@
+node_modules
+Dockerfile
+config.json
+docker.sh
+DockerfileTEST
+DockerNotes.md
+*.log
+.DS_Store

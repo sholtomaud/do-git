@@ -1,0 +1,40 @@
+{
+  "name": "do-git",
+  "version": "1.0.0",
+  "description": "docker Git utilities",
+  "main": "index.js",
+  "bin": {
+    "dogit": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/shotlom/do-git.git"
+  },
+  "keywords": [
+    "docker",
+    "git",
+    "utility"
+  ],
+  "dependencies": {
+    "debug": "^2.2.0",
+    "fs-extra": "^0.30.0",
+    "inquirer": "^1.1.2",
+    "json2md": "^1.5.1",
+    "json2yaml": "^1.1.0",
+    "kgo": "^4.0.3",
+    "progress": "^1.1.8"
+  },
+  "author": "Sholto Maud",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shotlom/do-git/issues"
+  },
+  "homepage": "https://github.com/shotlom/do-git#readme",
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {}
+}
