@@ -3,18 +3,21 @@
 
 const fs = require('fs-extra')
 const debug = require('debug')('program')
-// const config = require('./config')
 const program = require('commander')
 const path = require('path')
-const packageDir = process.cwd()
-const lib = require('./lib')
-var conf = {}
 
-conf.packageDir = packageDir
-conf._dogitdir = __dirname
+const db = require('./persistance')
+const lib = require('./lib')
+
+const packageDir = process.cwd()
+
+let settings = {}
+
+settings.packageDir = packageDir
+settings._dogitdir = __dirname
 
 fs.exists(path.join(packageDir, '/package.json'), function (exists) {
-  if (exists) conf.pack = require(path.join(packageDir, '/package.json'))
+  if (exists) settings.pack = require(path.join(packageDir, '/package.json'))
 })
 
 program
@@ -22,17 +25,20 @@ program
   .option('--config <config>', 'config.json file')
   .option('--feature <feature>', 'git branch used for the development of a feature.')
   .action(function (action) {
-    debug('action: ',action)
+    debug('action: ', action)
     debug('feature: ',program.feature)
     debug('config: ',program.config)
-    debug('package: ',conf.pack)
-    debug('packageDir: ',conf.packageDir)
+    debug('package: ',settings.pack)
+    debug('packageDir: ',settings.packageDir)
+    settings._action = action
+    settings._program = program
+    // settings.db = db
     switch (action.trim()) {
-      case 'init': lib.init(conf, action, program)
+      case 'init': lib.init(settings)
         break
-      case 'deploy': lib.deploy(conf, action, program)
+      case 'deploy': lib.deploy(settings)
         break
-      case 'stage': lib.stage(conf, action, program)
+      case 'stage': lib.stage(settings)
         break
       case 'clean': lib.clean()
         break
