@@ -7,3 +7,5 @@ DockerNotes.md
 *.log
 config
 NOTES.md
+scripts
+*.json
