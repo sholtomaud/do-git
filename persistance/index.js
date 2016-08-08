@@ -1,3 +1,5 @@
 'use strict'
 
-module.exports = require('./leveldb')
+module.exports = {
+  level : require('./leveldb')
+}

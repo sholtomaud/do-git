@@ -6,13 +6,13 @@ const debug = require('debug')('program')
 const program = require('commander')
 const path = require('path')
 
-const db = require('./persistance')
-const lib = require('./lib')
-
+const HOME = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+const DOGITDIR = path.join(HOME,'/.dogit')
 const packageDir = process.cwd()
 
-let settings = {}
+const lib = require('./lib')
 
+let settings = {}
 settings.packageDir = packageDir
 settings._dogitdir = __dirname
 
@@ -20,19 +20,22 @@ fs.exists(path.join(packageDir, '/package.json'), function (exists) {
   if (exists) settings.pack = require(path.join(packageDir, '/package.json'))
 })
 
+fs.mkdirs(DOGITDIR,function(err){
+  settings._dbdir = DOGITDIR
+})
+
 program
   .arguments('<action>')
   .option('--config <config>', 'config.json file')
   .option('--feature <feature>', 'git branch used for the development of a feature.')
   .action(function (action) {
-    debug('action: ', action)
-    debug('feature: ',program.feature)
-    debug('config: ',program.config)
-    debug('package: ',settings.pack)
-    debug('packageDir: ',settings.packageDir)
+    // debug('action: ', action)
+    // debug('feature: ',program.feature)
+    // debug('config: ',program.config)
+    // debug('package: ',settings.pack)
+    // debug('packageDir: ',settings.packageDir)
     settings._action = action
     settings._program = program
-    // settings.db = db
     switch (action.trim()) {
       case 'init': lib.init(settings)
         break
