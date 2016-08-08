@@ -9,4 +9,4 @@ config
 NOTES.md
 scripts
 *.json
-persistance
+persistance/*.*
