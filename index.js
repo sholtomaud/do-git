@@ -30,15 +30,10 @@ program
   .option('--config <config>', 'config.json file')
   .option('--feature <feature>', 'git branch used for the development of a feature.')
   .action(function (action) {
-    // debug('action: ', action)
-    // debug('feature: ',program.feature)
-    // debug('config: ',program.config)
-    // debug('package: ',settings.pack)
-    // debug('packageDir: ',settings.packageDir)
     settings._action = action
     settings._program = program
     switch (action.trim()) {
-      case 'init': lib.init(settings)
+      case 'setup': lib.setup(settings)
         break
       case 'deploy': lib.deploy(settings)
         break
@@ -46,7 +41,7 @@ program
         break
       case 'clean': lib.clean()
         break
-      default:
+      default: lib.git(settings)
     }
   })
 
