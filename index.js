@@ -15,6 +15,7 @@ const lib = require('./lib')
 let settings = {}
 settings.packageDir = packageDir
 settings._dogitdir = __dirname
+settings.spawnStdio = process.env.DEBUG
 
 fs.exists(path.join(packageDir, '/package.json'), function (exists) {
   if (exists) settings.pack = require(path.join(packageDir, '/package.json'))
