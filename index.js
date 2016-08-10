@@ -5,11 +5,7 @@ const fs = require('fs-extra')
 const debug = require('debug')('program')
 const program = require('commander')
 const path = require('path')
-
-const HOME = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
-const DOGITDIR = path.join(HOME,'/.dogit')
 const packageDir = process.cwd()
-
 const lib = require('./lib')
 
 let settings = {}
@@ -19,10 +15,6 @@ settings.spawnStdio = process.env.DEBUG
 
 fs.exists(path.join(packageDir, '/package.json'), function (exists) {
   if (exists) settings.pack = require(path.join(packageDir, '/package.json'))
-})
-
-fs.mkdirs(DOGITDIR,function(err){
-  settings._dbdir = DOGITDIR
 })
 
 program
