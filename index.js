@@ -15,6 +15,9 @@ settings.spawnStdio = process.env.DEBUG
 
 fs.exists(path.join(packageDir, '/package.json'), function (exists) {
   if (exists) settings.pack = require(path.join(packageDir, '/package.json'))
+  // let name = settings.pack.name;
+  // let camelName = name.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
+  // settings.pack.name = camelName;
 })
 
 program
